@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from 'next-themes'
 import { cn } from '@/lib/utils'
 import { useDashboardStore, ViewType } from '@/lib/store'
+import { IntroSequence } from '@/components/intro-sequence'
 
 // Components
 import { Sidebar } from '@/components/dashboard/sidebar'
@@ -257,6 +258,7 @@ function TopBar() {
 
 export default function Dashboard() {
   const { currentView, isDeepFocusMode, setCurrentView } = useDashboardStore()
+  const [showIntro, setShowIntro] = useState(true)
 
   // Initialize classPaths from mock data on mount
   useEffect(() => {
@@ -298,6 +300,13 @@ export default function Dashboard() {
 
   return (
     <>
+      {/* Intro Sequence */}
+      <AnimatePresence>
+        {showIntro && (
+          <IntroSequence onComplete={() => setShowIntro(false)} />
+        )}
+      </AnimatePresence>
+
       {/* Deep Focus Mode Overlay */}
       <AnimatePresence>
         {isDeepFocusMode && <DeepFocusMode />}
@@ -306,7 +315,7 @@ export default function Dashboard() {
       {/* Main Cockpit */}
       <div className={cn(
         "h-screen flex overflow-hidden bg-background",
-        isDeepFocusMode && "invisible"
+        (isDeepFocusMode || showIntro) && "invisible"
       )}>
         {/* Sidebar */}
         <Sidebar />
