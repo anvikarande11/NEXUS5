@@ -7,6 +7,7 @@ import { useDashboardStore } from '@/lib/store'
 import { mockSubjects, type Subject } from '@/lib/mock-data'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
+import { InteractiveGlobe } from './3d-globe'
 
 function HealthBar({ value, maxValue = 100, color, label }: { 
   value: number; 
@@ -227,7 +228,7 @@ export function SubjectHealth() {
   const warningCount = mockSubjects.filter(s => s.riskLevel === 'warning').length
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -253,18 +254,32 @@ export function SubjectHealth() {
         </div>
       </div>
 
+      {/* 3D Interactive Globe */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <InteractiveGlobe subjects={mockSubjects} />
+      </motion.div>
+
       {/* Subject Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {mockSubjects.map((subject, index) => (
-          <motion.div
-            key={subject.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-          >
-            <SubjectCard subject={subject} />
-          </motion.div>
-        ))}
+      <div>
+        <h3 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wider">
+          Detailed Performance Breakdown
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {mockSubjects.map((subject, index) => (
+            <motion.div
+              key={subject.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 + 0.3 }}
+            >
+              <SubjectCard subject={subject} />
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   )
