@@ -29,7 +29,7 @@ import { DashboardWhiteboard } from '@/components/dashboard/dashboard-whiteboard
 import { PriorityHub } from '@/components/dashboard/priority-hub'
 import { MusicPod } from '@/components/dashboard/music-pod'
 import { PulseQuiz } from '@/components/dashboard/pulse-quiz'
-import { Search, Command, Flame, User, Moon, Sun, Upload, MessageCircle, Users, Brain } from 'lucide-react'
+import { Search, Command, User, Moon, Sun, Upload, MessageCircle, Users, Brain } from 'lucide-react'
 import { mockClassPaths } from '@/lib/mock-data'
 
 // Animation variants
@@ -157,12 +157,6 @@ function TopBar() {
 
       {/* Right Side */}
       <div className="flex items-center gap-2">
-        {/* Streak */}
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-warning/10 border border-warning/20 rounded-xl light:bg-warning/15 light:border-warning/30">
-          <Flame className="w-4 h-4 text-warning" />
-          <span className="text-sm font-medium text-warning">7 day streak</span>
-        </div>
-
         {/* Divider */}
         <div className="w-px h-6 bg-border light:bg-border/50" />
 

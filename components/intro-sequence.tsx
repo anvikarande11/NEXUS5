@@ -221,7 +221,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [letterPositions, setLetterPositions] = useState<{ x: number; y: number }[]>([])
 
-  const title = 'NEXUS UNI'
+  const title = 'NEXUS-UNI'
 
   // Calculate final positions for snapping
   useEffect(() => {
@@ -234,10 +234,10 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
       // Calculate final positions where letters snap together
       const positions = title.split('').map((_, i) => {
         const letterWidth = 70 // Approximate width of each letter
-        const totalWidth = title.length * letterWidth * 0.6
+        const totalWidth = title.length * letterWidth * 0.5
         const startX = centerX - totalWidth / 2
         return {
-          x: startX + i * letterWidth * 0.6,
+          x: startX + i * letterWidth * 0.5,
           y: centerY,
         }
       })
@@ -379,7 +379,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
             transition={{ duration: 0.3 }}
             className="text-7xl font-serif font-bold text-white drop-shadow-2xl"
           >
-            NEXUS UNI
+            NEXUS-UNI
           </motion.div>
         </motion.div>
       )}
